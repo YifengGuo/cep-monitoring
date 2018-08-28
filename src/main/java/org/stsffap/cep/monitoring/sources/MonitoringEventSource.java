@@ -73,7 +73,7 @@ public class MonitoringEventSource extends RichParallelSourceFunction<Monitoring
         int index = getRuntimeContext().getIndexOfThisSubtask();
 
         offset = (int)((double)maxRackId / numberTasks * index);
-        shard = (int)((double)maxRackId / numberTasks * (index + 1)) - offset;
+        shard = (int)((double)maxRackId / numberTasks * (index + 1)) - offset <= 0 ? 1 : (int)((double)maxRackId / numberTasks * (index + 1)) - offset;
 
         random = new Random();
     }
